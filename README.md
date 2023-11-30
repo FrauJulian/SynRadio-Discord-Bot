@@ -30,3 +30,5 @@ npm install
 ```sh
 node index.js
 ```
+
+## ~ FrauJulian | WORK TOGETHER
