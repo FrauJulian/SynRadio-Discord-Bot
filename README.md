@@ -1,6 +1,6 @@
 # 📻 SynRadio.de
 
-## LASS UNS GEMEINSAM ARBEITEN
+**LASS UNS GEMEINSAM ARBEITEN**
 
 **Erstelle ein Fork, entwickle den Bot weiter, erstelle einen Pull Request!**
 
