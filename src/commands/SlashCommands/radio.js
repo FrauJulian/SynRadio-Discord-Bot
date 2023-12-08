@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const config = require("../../../CONFIGS/config.json")
-const { joinVoiceChannel,  createAudioPlayer,  createAudioResource } = require("@discordjs/voice");
+const { joinVoiceChannel,  createAudioPlayer,  createAudioResource, getVoiceConnection } = require("@discordjs/voice");
 const clientC = require("../../../index");
 
 module.exports = {
@@ -32,16 +32,12 @@ module.exports = {
             if (interaction.member.voice.channelId !== interaction.guild.members.me.voice.channelId) {
                 const alreadyActiveEmbed = new EmbedBuilder()
                 .setAuthor({ name: embed_author_text + "BEREITS AKTIV", iconURL: embed_author_icon })
-                .setDescription(`**Der Bot ist auf diesen Server bereits aktiv!** ## Du findest den Bot in <#${interaction.guild.members.me.voice.channelId}>!`)
+                .setDescription(`## Der Bot ist auf diesen Server bereits aktiv! Du findest den Bot in <#${interaction.guild.members.me.voice.channelId}>!`)
                 .setTimestamp()
                 .setFooter({ text: embed_footer_text, iconURL: embed_footer_icon })
                 .setColor(embed_color)
                 return interaction.reply({ embeds: [alreadyActiveEmbed], ephemeral: true });
             }
-        }
-
-        if (interaction.member.voice.channel.id) {
-            
         }
 
         let Radio = config.generell.radio_link;
@@ -50,10 +46,12 @@ module.exports = {
 
         const RadioPlay = new EmbedBuilder()
         .setAuthor({ name: embed_author_text + "GESTARTET", iconURL: embed_author_icon })
-        .setDescription(`## Das Radio wurde gestartet für die beste Laune!`)
+        .setDescription(`## Das Radio wurde für die beste Laune gestartet!`)
         .setTimestamp()
         .setFooter({ text: embed_footer_text, iconURL: embed_footer_icon })
         .setColor(embed_color)
+
+        const connectionRadio = getVoiceConnection(interaction.guild.id);
 
         try {
             const connection = joinVoiceChannel({

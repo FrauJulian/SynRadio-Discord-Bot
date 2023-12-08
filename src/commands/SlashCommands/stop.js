@@ -25,7 +25,7 @@ module.exports = {
             if (interaction.member.voice.channelId !== interaction.guild.members.me.voice.channelId) {
                 const alreadyActiveEmbed = new EmbedBuilder()
                 .setAuthor({ name: embed_author_text + "BEREITS AKTIV", iconURL: embed_author_icon })
-                .setDescription(`**Der Bot ist auf diesen Server aktiv, daher du dich nicht in diesen Kanal befindest darfst du dies nicht!** \n## Du findest den Bot in <#${interaction.guild.members.me.voice.channelId}>!`)
+                .setDescription(`## Der Bot ist auf diesen Server bereits aktiv! Du findest den Bot in <#${interaction.guild.members.me.voice.channelId}>!`)
                 .setTimestamp()
                 .setFooter({ text: embed_footer_text, iconURL: embed_footer_icon })
                 .setColor(embed_color)

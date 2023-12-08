@@ -44,14 +44,14 @@ const { readdirSync } = require("node:fs");
 const moment = require("moment");
 
 const BotlistMeClient = require("botlist.me.js");
-const MEBotList = new BotlistMeClient("1bavNqgITj-EvbUBOk@jIbTnVjCmBI", client);
+const MEBotList = new BotlistMeClient(config.generell.botlist, client);
 
 setInterval(async () => {
   MEBotList.on("posted", () => {
   });
   
   MEBotList.on("error", err => {
-    console.log("8) Ein Fehler ist aufgetreten! Code: " + err)
+    console.log("6) Ein Fehler ist aufgetreten! Code: " + err)
   });
 }, 604800000)
 
