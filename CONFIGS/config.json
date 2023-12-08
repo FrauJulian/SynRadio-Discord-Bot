@@ -1,9 +1,9 @@
 {
   "generell": {
-    "bot_token": "MTE3MjkxOTQ3MzY1MzY5ODY1MQ.GwBASx.m_2PantDcf3U7gM8Cib3LVimIY95K3Str8kpzQ",
+    "bot_token": "",
     "radio_link": "https://synradiode.stream.laut.fm/synradiode",
-    "bot_id": "1172919473653698651",
-    "botlist": "1bavNqgITj-EvbUBOk@jIbTnVjCmBI"
+    "bot_id": "",
+    "botlist": ""
   },
   "fehler_embed": {
     "embed_author_text": "🎵 | SynRadio - FEHLER",
