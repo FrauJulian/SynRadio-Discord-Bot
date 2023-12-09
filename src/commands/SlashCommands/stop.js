@@ -11,6 +11,12 @@ module.exports = {
         const connection = getVoiceConnection(interaction.guild.id);
         const voiceChannel = interaction.member.voice.channel;
 
+	let embed_author_text = config.radio_embed_theme.embed_author_text;
+        let embed_author_icon = config.radio_embed_theme.embed_author_icon;
+        let embed_footer_text = config.radio_embed_theme.embed_footer_text;
+        let embed_footer_icon = config.radio_embed_theme.embed_footer_icon;
+        let embed_color = config.radio_embed_theme.embed_color;
+
         if (!voiceChannel) {
             const voiceChannelEmbed = new EmbedBuilder()
             .setAuthor({ name: embed_author_text + "SPRACHKANAL", iconURL: embed_author_icon })
@@ -35,12 +41,6 @@ module.exports = {
 
         try {
             connection.destroy();
-
-            let embed_author_text = config.radio_embed_theme.embed_author_text;
-            let embed_author_icon = config.radio_embed_theme.embed_author_icon;
-            let embed_footer_text = config.radio_embed_theme.embed_footer_text;
-            let embed_footer_icon = config.radio_embed_theme.embed_footer_icon;
-            let embed_color = config.radio_embed_theme.embed_color;
 
             const stoppedRadio = new EmbedBuilder()
             .setAuthor({ name: embed_author_text + "GESTOPT", iconURL: embed_author_icon })
