@@ -16,16 +16,19 @@ module.exports = {
     const connectionRadio = getVoiceConnection(newState.guild.id);
 
     if(newState.member.id === config.generell.bot_id) {
-        setTimeout(async () => {
-            await connectionRadio.destroy();
-            await connectionRadio.disconnect()
+      try  {
+        setInterval(async () => {
+          await connectionRadio.disconnect();
 
-            const connection = await joinVoiceChannel({
-                channelId: newState.member.voice.channel.id,
-                guildId: newState.guild.id,
-                adapterCreator: newState.guild.voiceAdapterCreator
-            }).subscribe(AudioPlayer);
-        }, 5400000)
+          const connection = await joinVoiceChannel({
+              channelId: newState.member.voice.channel.id,
+              guildId: newState.guild.id,
+              adapterCreator: newState.guild.voiceAdapterCreator
+          }).subscribe(AudioPlayer);
+      }, 5400000)
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 }
