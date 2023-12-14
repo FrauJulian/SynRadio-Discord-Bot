@@ -15,20 +15,22 @@ module.exports = {
 
     const connectionRadio = getVoiceConnection(newState.guild.id);
 
-    if(newState.member.id === config.generell.bot_id) {
-      try  {
-        setInterval(async () => {
-          await connectionRadio.disconnect();
-
-          const connection = await joinVoiceChannel({
-              channelId: newState.member.voice.channel.id,
-              guildId: newState.guild.id,
-              adapterCreator: newState.guild.voiceAdapterCreator
-          }).subscribe(AudioPlayer);
-      }, 5400000)
-      } catch (err) {
-        console.log(err);
-      }
+    function LeaveStop() {
+      connectionRadio.destroy();
+      connectionRadio.disconnect();
     }
-  }
+    
+    if(newState.member.id === config.generell.bot_id) {
+      setTimeout(async () => {
+        try {
+          LeaveStop();
+        } catch (err) {};
+
+        const connection = await joinVoiceChannel({
+            channelId: newState.member.voice.channel.id,
+            guildId: newState.guild.id,
+            adapterCreator: newState.guild.voiceAdapterCreator
+        }).subscribe(AudioPlayer);
+    }, 5400000)
+  }}
 }
