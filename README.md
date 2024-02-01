@@ -1,11 +1,8 @@
 # 📻 SynRadio.de
 
-**LASS UNS GEMEINSAM ARBEITEN**
+**Zusammenarbeiten, einfach forken!**
 
-**Erstelle ein Fork, entwickle den Bot weiter, erstelle einen Pull Request!**
+**Der offizielle SynRadio.de Discord Bot source code!**
+**Es ist möglich, dass dieser Quellcode fehlerhaft oder unvollständig ist, weshalb immer die neueste Entwicklerversion hochgeladen wird.**
 
-<div align="center">
-    <img src="https://skillicons.dev/icons?i=nodejs,javascript,discord,github,git" />
-</div>
-
-## ~ FrauJulian | WORK TOGETHER
+## ~ FrauJulian
