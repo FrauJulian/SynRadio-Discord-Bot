@@ -6,7 +6,7 @@
     "botlist": ""
   },
   "fehler_embed": {
-    "embed_author_text": "🎵 | SynRadio - FEHLER",
+    "embed_author_text": "🎺 | SynRadio - FEHLER",
     "embed_author_icon": "https://media.discordapp.net/attachments/1170393889484574750/1173303745749200937/SYNRADIO_NoText.png?ex=65637743&is=65510243&hm=ff4e0396fece05fcdf8d7c33ded5f147c526ea790caca9fbd21c4184e15bcb73&=&width=473&height=473",
     "embed_description": "## Hier ist etwas schief gelaufen!\nCode: %error%",
     "embed_footer_text": "SynHost.de | FAST LIKE A BOLT ⚡️",
@@ -14,7 +14,7 @@
     "embed_color": "Red"
   },
   "radio_embed_theme": {
-    "embed_author_text": "🎵 | SynRadio - ",
+    "embed_author_text": "🎺 | SynRadio - ",
     "embed_author_icon": "https://media.discordapp.net/attachments/1170393889484574750/1173303745749200937/SYNRADIO_NoText.png?ex=65637743&is=65510243&hm=ff4e0396fece05fcdf8d7c33ded5f147c526ea790caca9fbd21c4184e15bcb73&=&width=473&height=473",
     "embed_footer_text": "SynHost.de | FAST LIKE A BOLT ⚡️",
     "embed_footer_icon": "https://media.discordapp.net/attachments/1170393889484574750/1170661242923393034/DC.gif?ex=6559da3e&is=6547653e&hm=673832e813ea6160ce8ecab79bbd3334d893d32d1e3382689fa916674b760b22&=",
