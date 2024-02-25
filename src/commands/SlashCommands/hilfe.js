@@ -5,7 +5,7 @@ const config = require("../../../CONFIGS/config.json")
 module.exports = {
     data: new SlashCommandBuilder()
     .setName("hilfe")
-	.setDescription("🎵 | Du verstehst den Bot nicht? Schaue hier nach!"),
+	.setDescription("🎺 | Brauchst du Hilfe?"),
     run: async (client, interaction) => {
         let embed_author_text = config.radio_embed_theme.embed_author_text;
         let embed_author_icon = config.radio_embed_theme.embed_author_icon;
@@ -14,11 +14,12 @@ module.exports = {
         let embed_color = config.radio_embed_theme.embed_color;
 
         var HilfeEmbed = new EmbedBuilder()
-        .setAuthor({ name: embed_author_text + "SONGS", iconURL: embed_author_icon })
-        .setDescription(`**Denk nicht kompliziert! Denk logisch!**\n\n[Melde dich bei Problemen Bitte auf unserer Webseite!](https://synradio.de/support/tickets)\n⠀`)
+        .setAuthor({ name: embed_author_text + "HILFE", iconURL: embed_author_icon })
+        .setDescription("[LautFM](https://laut.fm/synradiode) | [Webseite](https://synradio.de/) | [Impressum](https://synradio.de/impressum.html)\nKontaktiere uns unter `Support@SynRadio.de`!\n## Du bruachst Hilfe?")
         .addFields(
-            { name: "/Radio", value: "Gute Laune ist mit diesen Befehl garantiert!", inline: true  },
-            { name: "/Stop", value: "Stoppe mit diesen Befehl Bitte nicht den SynRadio!", inline: true  },
+            { name: "/Radio", value: "Starte den Radio für die beste Laune!", inline: false  },
+            { name: "/Stop", value: "Stoppe den Radio für die schlechteste Laune!", inline: false  },
+            { name: "/Stats", value: "Siehe die aktuellen Stats des Radio's ein.", inline: false  },
         )
         .setTimestamp()
         .setFooter({ text: embed_footer_text, iconURL: embed_footer_icon })

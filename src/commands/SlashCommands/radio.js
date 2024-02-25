@@ -1,16 +1,17 @@
-const { EmbedBuilder } = require("discord.js");
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const config = require("../../../CONFIGS/config.json")
-const { joinVoiceChannel,  createAudioPlayer,  createAudioResource, getVoiceConnection } = require("@discordjs/voice");
-const clientC = require("../../../index");
+let { EmbedBuilder } = require("discord.js");
+let { SlashCommandBuilder } = require("@discordjs/builders");
+let config = require("../../../CONFIGS/config.json")
+let { joinVoiceChannel,  createAudioPlayer,  createAudioResource, getVoiceConnection } = require("@discordjs/voice");
+const NodeCache = require( "node-cache" );
+const myCache = new NodeCache();
 
 module.exports = {
     data: new SlashCommandBuilder()
     .setName("radio")
-	.setDescription("🎵 | Hole dir mit diesen Befehl den SynRadio in deinen Kanal!"),
+	.setDescription("🎺 | Starte den Radio für die beste Laune!"),
     run: async (client, interaction) => {
-        const AudioPlayer = createAudioPlayer();
-        const voiceChannel = interaction.member.voice.channel;
+        let AudioPlayer = createAudioPlayer();
+        let voiceChannel = interaction.member.voice.channel;
 
         let embed_author_text = config.radio_embed_theme.embed_author_text;
         let embed_author_icon = config.radio_embed_theme.embed_author_icon;
@@ -19,9 +20,9 @@ module.exports = {
         let embed_color = config.radio_embed_theme.embed_color;
 
         if (!voiceChannel) {
-            const voiceChannelEmbed = new EmbedBuilder()
+            let voiceChannelEmbed = new EmbedBuilder()
             .setAuthor({ name: embed_author_text + "SPRACHKANAL", iconURL: embed_author_icon })
-            .setDescription(`**Du musst in einem Sprachkanal sein um das Musik System zu nutzen!**`)
+            .setDescription("[LautFM](https://laut.fm/synradiode) | [Webseite](https://synradio.de/) | [Impressum](https://synradio.de/impressum.html)\nKontaktiere uns unter `Support@SynRadio.de`!\n## Du musst in einem Sprachkanal sein um das Musik System zu nutzen!")
             .setTimestamp()
             .setFooter({ text: embed_footer_text, iconURL: embed_footer_icon })
             .setColor(embed_color)
@@ -30,9 +31,9 @@ module.exports = {
 
         if (interaction.guild.members.me.voice.channelId !== null) {
             if (interaction.member.voice.channelId !== interaction.guild.members.me.voice.channelId) {
-                const alreadyActiveEmbed = new EmbedBuilder()
+                let alreadyActiveEmbed = new EmbedBuilder()
                 .setAuthor({ name: embed_author_text + "BEREITS AKTIV", iconURL: embed_author_icon })
-                .setDescription(`## Der Bot ist auf diesen Server bereits aktiv! Du findest den Bot in <#${interaction.guild.members.me.voice.channelId}>!`)
+                .setDescription("[LautFM](https://laut.fm/synradiode) | [Webseite](https://synradio.de/) | [Impressum](https://synradio.de/impressum.html)\nKontaktiere uns unter `Support@SynRadio.de`!\n## Der Bot ist auf diesen Server bereits aktiv! Du findest den Radio in <#${"+interaction.guild.members.me.voice.channelId+"}>!")
                 .setTimestamp()
                 .setFooter({ text: embed_footer_text, iconURL: embed_footer_icon })
                 .setColor(embed_color)
@@ -41,41 +42,79 @@ module.exports = {
         }
 
         let Radio = config.generell.radio_link;
-        const Audio = createAudioResource(Radio);
+        let Audio = createAudioResource(Radio);
         AudioPlayer.play(Audio);
 
-        const RadioPlay = new EmbedBuilder()
+        let RadioPlay = new EmbedBuilder()
         .setAuthor({ name: embed_author_text + "GESTARTET", iconURL: embed_author_icon })
-        .setDescription(`## Das Radio wurde für die beste Laune gestartet!`)
+        .setDescription("[LautFM](https://laut.fm/synradiode) | [Webseite](https://synradio.de/) | [Impressum](https://synradio.de/impressum.html)\nKontaktiere uns unter `Support@SynRadio.de`!\n## Die beste Laune ist garantiert!")
         .setTimestamp()
         .setFooter({ text: embed_footer_text, iconURL: embed_footer_icon })
         .setColor(embed_color)
 
-        const connectionRadio = getVoiceConnection(interaction.guild.id);
 
         try {
-            const connection = joinVoiceChannel({
-                channelId: interaction.member.voice.channel.id,
-                guildId: interaction.guild.id,
-                adapterCreator: interaction.guild.voiceAdapterCreator
-            }).subscribe(AudioPlayer);
+
+            function Sub() {
+                setTimeout(async () => {
+                    let igi = myCache.get("igiC");
+                    let connection = getVoiceConnection(igi);
+
+                    connection.destroy();
+
+                    ConnectVoice();
+                }, 1800000);
+            }
+
+            function setMax() {
+                let igi = myCache.get("igiC");
+                let connection = getVoiceConnection(igi);
+
+                connection.setMaxListeners(75);
+            }
+
+            function GetCache() {
+                myCache.set("imvciC", interaction.member.voice.channel.id);
+                myCache.set("igiC", interaction.guild.id);
+                myCache.set("igvC", interaction.guild.voiceAdapterCreator);
+            }
+
+            function ConnectVoice() {
+
+                let imvci = myCache.get("imvciC");
+                let igi = myCache.get("igiC");
+                let igv = myCache.get("igvC");
+
+                joinVoiceChannel({
+                    channelId: imvci,
+                    guildId: igi,
+                    adapterCreator: igv
+                }).subscribe(AudioPlayer);
+
+                setMax();
+                Sub();
+            }
+            
+            GetCache();
+            ConnectVoice();
             interaction.reply({ embeds: [RadioPlay], ephemeral: true });
+
         } catch (err) {
             console.log(err)
 
-            let eembed_author_text = config.fehler_embed.embed_author_text;
-            let eembed_author_icon = config.fehler_embed.embed_author_icon;
-            let eembed_description = config.fehler_embed.embed_description.replace("%error%", "" + err + "");
-            let eembed_footer_text = config.fehler_embed.embed_footer_text;
-            let eembed_footer_icon = config.fehler_embed.embed_footer_icon;
-            let eembed_color = config.fehler_embed.embed_color;
+            let embed_author_text = config.fehler_embed.embed_author_text;
+            let embed_author_icon = config.fehler_embed.embed_author_icon;
+            let embed_description = config.fehler_embed.embed_description.replace("%error%", "" + err + "");
+            let embed_footer_text = config.fehler_embed.embed_footer_text;
+            let embed_footer_icon = config.fehler_embed.embed_footer_icon;
+            let embed_color = config.fehler_embed.embed_color;
     
-            const ErrEmbed = new EmbedBuilder()
-            .setAuthor({ name: eembed_author_text, iconURL: eembed_author_icon })
-            .setDescription(eembed_description)
+            let ErrEmbed = new EmbedBuilder()
+            .setAuthor({ name: embed_author_text, iconURL: embed_author_icon })
+            .setDescription(embed_description)
             .setTimestamp()
-            .setFooter({ text: eembed_footer_text, iconURL: eembed_footer_icon })
-            .setColor(eembed_color)
+            .setFooter({ text: embed_footer_text, iconURL: embed_footer_icon })
+            .setColor(embed_color)
             interaction.reply({ embeds: [ErrEmbed], ephemeral: true})
           }
     }

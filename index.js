@@ -53,7 +53,7 @@ setInterval(async () => {
   MEBotList.on("error", err => {
     console.log("6) Ein Fehler ist aufgetreten! Code: " + err)
   });
-}, 604800000)
+}, 43200000)
 
 module.exports = client;
 
@@ -81,15 +81,18 @@ readdirSync("./src/events").forEach(async (file) => {
 });
 
 process.on("unhandledRejection", (err) => {
-  console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 1) Ein Fehler ist aufgetreten! Code: ` + err);
+  return err;
+  //console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 1) Ein Fehler ist aufgetreten! Code: ` + err);
 });
 
 process.on("uncaughtException", (err) => {
-  console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 2) Ein Fehler ist aufgetreten! Code: ` + err);
+  return err;
+  //console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 2) Ein Fehler ist aufgetreten! Code: ` + err);
 })
 
 process.on("uncaughtExceptionMonitor", (err) => {
-  console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 3) Ein Fehler ist aufgetreten! Code: ` + err);
+  return err;
+  //console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 3) Ein Fehler ist aufgetreten! Code: ` + err);
 });
 
 client.login(token);

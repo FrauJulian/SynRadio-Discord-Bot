@@ -1,5 +1,4 @@
-const { Events, ActivityType } = require("discord.js");
-const moment = require("moment");
+let { Events, ActivityType } = require("discord.js");
 
 module.exports = {
   name: Events.ClientReady,
@@ -9,12 +8,12 @@ module.exports = {
     setInterval(async () => {
         const url = await fetch("https://api.laut.fm/station/synradiode/current_song");
         if(url.ok) {
-            var RadioData = await url.json(); 
+            let RadioData = await url.json(); 
 
                 client.user.setPresence({
-                    activities: [{ name: `🎵 ${RadioData.artist.name + " - " + RadioData.title || "Akutell Spielt kein Song!"}`, type: ActivityType.Custom }],
-                    status: `🎵 ${RadioData.artist.name + " - " + RadioData.title || "Akutell Spielt kein Song!"}`,
+                    activities: [{ name: `🎺 ${RadioData.title + " von " + RadioData.artist.name || "Akutell Spielt kein Song!"}`, type: ActivityType.Custom }],
+                    status: `🎺 ${RadioData.title + " von " + RadioData.artist.name || "Akutell Spielt kein Song!"}`,
                 });
-        }}, 2500)
+        }}, 3000);
     }
 }
