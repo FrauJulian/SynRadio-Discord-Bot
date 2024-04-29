@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/builders": "^1.6.5",
+    "@discordjs/node-pre-gyp": "^0.4.5",
     "@discordjs/rest": "^2.0.1",
     "@discordjs/voice": "^0.16.0",
     "botlist.me.js": "^1.0.3",
@@ -19,9 +20,15 @@
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^5.2.0",
     "fs": "^0.0.1-security",
+    "index.js": "^0.0.3",
+    "json": "^11.0.0",
     "lautfm": "^1.1.7",
     "libsodium-wrappers": "^0.7.13",
+    "lru-cache": "^10.2.0",
     "moment": "^2.29.4",
-    "node-cache": "^5.1.2"
+    "mysql": "^2.18.1",
+    "node-addon-api": "^7.1.0",
+    "node-cache": "^5.1.2",
+    "opusscript": "^0.0.8"
   }
 }

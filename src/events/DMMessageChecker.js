@@ -1,5 +1,4 @@
-const { EmbedBuilder, Events } = require("discord.js");
-const config = require("../../CONFIGS/config.json");
+const { Events } = require("discord.js");
 const moment = require("moment");
 
 module.exports = {
@@ -7,6 +6,12 @@ module.exports = {
     once: false,
     execute: async (message) => {
         if (message.guild) return;
-        console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] Der Bot hat eine DM von ` + message.author.username + ` erhalten mit Inhalt '` + message.content + `'!`);
-    }
-}
+        console.log(
+            `[${moment().format("DD-MM-YYYY HH:mm:ss")}] Der Bot hat eine DM von ` +
+            message.author.username +
+            ` erhalten mit Inhalt '` +
+            message.content +
+            `'!`
+        );
+    },
+};

@@ -15,11 +15,11 @@ module.exports = {
 
         var HilfeEmbed = new EmbedBuilder()
         .setAuthor({ name: embed_author_text + "HILFE", iconURL: embed_author_icon })
-        .setDescription("[LautFM](https://laut.fm/synradiode) | [Webseite](https://synradio.de/) | [Impressum](https://synradio.de/impressum.html)\nKontaktiere uns unter `Support@SynRadio.de`!\n## Du bruachst Hilfe?")
+        .setDescription("[LautFM](https://laut.fm/synradiode) | [Webseite](https://synradio.de/) | [Impressum](https://synradio.de/impressum.html)\nKontaktiere uns unter `Support@SynRadio.de`!\n## Du brauchst Hilfe?")
         .addFields(
-            { name: "/Radio", value: "Starte den Radio für die beste Laune!", inline: false  },
-            { name: "/Stop", value: "Stoppe den Radio für die schlechteste Laune!", inline: false  },
-            { name: "/Stats", value: "Siehe die aktuellen Stats des Radio's ein.", inline: false  },
+            { name: "/Radio", value: "Starte den Radio für die beste Laune!", inline: true  },
+            { name: "/Stop", value: "Stoppe den Radio für die schlechteste Laune!", inline: true  },
+            { name: "/Stats", value: "Siehe die aktuellen Stats des Radio's ein.", inline: true  },
         )
         .setTimestamp()
         .setFooter({ text: embed_footer_text, iconURL: embed_footer_icon })

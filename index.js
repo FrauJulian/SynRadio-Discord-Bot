@@ -1,31 +1,25 @@
-const { 
-  Client, 
-  Collection, 
-  GatewayIntentBits, 
-  Partials, 
-} = require("discord.js");
-
-const client = new Client({
+let { Client, Collection, GatewayIntentBits, Partials } = require("discord.js");
+let client = new Client({
   intents: [
-    GatewayIntentBits.AutoModerationConfiguration, 
-    GatewayIntentBits.AutoModerationExecution, 
-    GatewayIntentBits.DirectMessageReactions, 
-    GatewayIntentBits.DirectMessageTyping, 
-    GatewayIntentBits.DirectMessages, 
-    GatewayIntentBits.GuildEmojisAndStickers, 
-    GatewayIntentBits.GuildIntegrations, 
-    GatewayIntentBits.GuildInvites, 
-    GatewayIntentBits.GuildMembers, 
-    GatewayIntentBits.GuildMessageReactions, 
-    GatewayIntentBits.GuildMessageTyping, 
-    GatewayIntentBits.GuildMessages, 
-    GatewayIntentBits.GuildModeration, 
-    GatewayIntentBits.GuildPresences, 
-    GatewayIntentBits.GuildScheduledEvents, 
-    GatewayIntentBits.GuildVoiceStates, 
-    GatewayIntentBits.GuildWebhooks, 
-    GatewayIntentBits.Guilds, 
-    GatewayIntentBits.MessageContent
+    GatewayIntentBits.AutoModerationConfiguration,
+    GatewayIntentBits.AutoModerationExecution,
+    GatewayIntentBits.DirectMessageReactions,
+    GatewayIntentBits.DirectMessageTyping,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.GuildEmojisAndStickers,
+    GatewayIntentBits.GuildIntegrations,
+    GatewayIntentBits.GuildInvites,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.GuildMessageTyping,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildModeration,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildScheduledEvents,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildWebhooks,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.MessageContent,
   ],
   partials: [
     Partials.Channel,
@@ -34,26 +28,24 @@ const client = new Client({
     Partials.Message,
     Partials.Reaction,
     Partials.ThreadMember,
-    Partials.User
+    Partials.User,
   ],
-  shards: "auto"
+  shards: "auto",
 });
 
-const config = require("./CONFIGS/config.json");
-const { readdirSync } = require("node:fs");
-const moment = require("moment");
+let config = require("./CONFIGS/config.json");
+let { readdirSync } = require("node:fs");
 
-const BotlistMeClient = require("botlist.me.js");
-const MEBotList = new BotlistMeClient(config.generell.botlist, client);
+let BotlistMeClient = require("botlist.me.js");
+let MEBotList = new BotlistMeClient(config.generell.botlist, client);
 
 setInterval(async () => {
-  MEBotList.on("posted", () => {
+  MEBotList.on("posted", () => {});
+
+  MEBotList.on("error", (err) => {
+    console.log("6) Ein Fehler ist aufgetreten! Code: " + err);
   });
-  
-  MEBotList.on("error", err => {
-    console.log("6) Ein Fehler ist aufgetreten! Code: " + err)
-  });
-}, 43200000)
+}, 43200000);
 
 module.exports = client;
 
@@ -64,15 +56,15 @@ client.commands = new Collection();
 client.slashcommands = new Collection();
 client.slashdatas = [];
 
-const slashcommands = [];
+let slashcommands = [];
 readdirSync("./src/commands/SlashCommands").forEach(async (file) => {
-  const command = await require(`./src/commands/SlashCommands/${file}`);
+  let command = await require(`./src/commands/SlashCommands/${file}`);
   client.slashdatas.push(command.data.toJSON());
   client.slashcommands.set(command.data.name, command);
 });
 
 readdirSync("./src/events").forEach(async (file) => {
-  const event = await require(`./src/events/${file}`);
+  let event = await require(`./src/events/${file}`);
   if (event.once) {
     client.once(event.name, (...args) => event.execute(...args));
   } else {
@@ -81,18 +73,15 @@ readdirSync("./src/events").forEach(async (file) => {
 });
 
 process.on("unhandledRejection", (err) => {
-  return err;
-  //console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 1) Ein Fehler ist aufgetreten! Code: ` + err);
+  console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 1) Code: ` + err);
 });
 
 process.on("uncaughtException", (err) => {
-  return err;
-  //console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 2) Ein Fehler ist aufgetreten! Code: ` + err);
-})
+  console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 2) Code: ` + err);
+});
 
 process.on("uncaughtExceptionMonitor", (err) => {
-  return err;
-  //console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 3) Ein Fehler ist aufgetreten! Code: ` + err);
+  console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] 3) Code: ` + err);
 });
 
 client.login(token);
