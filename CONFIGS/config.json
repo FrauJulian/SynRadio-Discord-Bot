@@ -3,7 +3,13 @@
     "bot_token": "",
     "radio_link": "https://synradiode.stream.laut.fm/synradiode",
     "bot_id": "",
-    "botlist": ""
+    "botlist": "",
+
+    "db_host": "",
+    "db_port": "",
+    "db_username": "",
+    "db_password": "",
+    "db_name": ""
   },
   "fehler_embed": {
     "embed_author_text": "🎺 | SynRadio - FEHLER",
