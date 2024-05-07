@@ -3,8 +3,6 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const config = require("../../../CONFIGS/config.json")
 const { joinVoiceChannel,  createAudioPlayer,  createAudioResource, getVoiceConnection } = require("@discordjs/voice");
 const mysql = require("mysql");
-const NodeCache = require( "node-cache" );
-const myCache = new NodeCache();
 
 module.exports = {
     data: new SlashCommandBuilder()
