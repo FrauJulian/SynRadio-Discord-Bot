@@ -1,17 +1,17 @@
 {
-  "name": "synradio-discord-bot",
-  "version": "3.1.0",
+  "name": "synradio",
+  "version": "3.0.0",
   "description": "SynRadio made by FrauJulian & DamiyTV | GERLACH SYSTEMS - SynRadio.de",
   "main": "Index.js",
   "scripts": {
     "start": "node ./Index.js",
-    "dev": "nodemon --trace-warnings ./Index.js",
+    "dev": "nodemon --trace-warnings ./Index.js"
   },
   "repository": {
     "type": "github",
     "url": "https://github.com/FrauJulian/SynRadio-Discord-Bot"
   },
-  "author": "FrauJulian & Damiy | Gerlach Systems - SynRadio",
+  "author": "FrauJulian & Damiy | GERLACH SYSTEMS - SynRadio.de",
   "license": "MIT",
   "dependencies": {
     "@discordjs/rest": "^2.3.0",
